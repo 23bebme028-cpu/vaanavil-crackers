@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vaanavil Crackers — Sivakasi Fireworks Online</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Work+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0E1F;
+    --bg-alt:#12162C;
+    --card:#171B34;
+    --card-hover:#1E2340;
+    --gold:#F4B942;
+    --magenta:#E6408F;
+    --teal:#2FE6C4;
+    --cream:#F5EFE6;
+    --muted:#9CA3C4;
+    --line:#2A2F52;
+    --display: 'Fraunces', serif;
+    --body: 'Work Sans', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--cream);
+    font-family:var(--body);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  button{font-family:inherit;cursor:pointer;}
+  ::selection{background:var(--magenta);color:var(--cream);}
+  :focus-visible{outline:2px solid var(--teal);outline-offset:3px;}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(11,14,31,0.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    max-width:1200px;margin:0 auto;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 24px;
+  }
+  .brand{
+    display:flex;align-items:center;gap:10px;
+    font-family:var(--display);
+    font-weight:700;font-size:22px;
+    letter-spacing:0.2px;
+  }
+  .brand .spark{
+    width:26px;height:26px;flex-shrink:0;
+  }
+  .nav-links{
+    display:flex;gap:28px;align-items:center;
+    font-size:14px;font-weight:500;color:var(--muted);
+  }
+  .nav-links a{text-decoration:none;transition:color .2s;}
+  .nav-links a:hover{color:var(--gold);}
+  .cart-btn{
+    display:flex;align-items:center;gap:8px;
+    background:var(--card);
+    border:1px solid var(--line);
+    color:var(--cream);
+    padding:9px 16px;border-radius:999px;
+    font-size:14px;font-weight:600;
+    transition:border-color .2s,background .2s;
+    position:relative;
+  }
+  .cart-btn:hover{border-color:var(--gold);background:var(--card-hover);}
+  .cart-count{
+    background:var(--magenta);color:var(--cream);
+    font-family:var(--mono);font-size:11px;font-weight:600;
+    min-width:18px;height:18px;border-radius:999px;
+    display:flex;align-items:center;justify-content:center;
+    padding:0 4px;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    max-width:1200px;margin:0 auto;
+    padding:72px 24px 60px;
+    display:grid;grid-template-columns:1.1fr 0.9fr;
+    gap:40px;align-items:center;
+    overflow:hidden;
+  }
+  .eyebrow{
+    font-family:var(--mono);font-size:12px;
+    letter-spacing:1.5px;text-transform:uppercase;
+    color:var(--teal);
+    display:inline-flex;align-items:center;gap:8px;
+    margin-bottom:18px;
+  }
+  .eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--teal);}
+  .hero h1{
+    font-family:var(--display);
+    font-size:clamp(38px,5vw,60px);
+    line-height:1.04;
+    font-weight:700;
+    margin:0 0 18px;
+    letter-spacing:-0.5px;
+  }
+  .hero h1 em{
+    font-style:italic;
+    font-weight:900;
+    background:linear-gradient(90deg,var(--gold),var(--magenta));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p{
+    color:var(--muted);font-size:17px;max-width:460px;margin:0 0 30px;
+  }
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--gold);color:#1B1400;
+    border:none;padding:14px 26px;border-radius:10px;
+    font-weight:700;font-size:15px;
+    transition:transform .15s, box-shadow .15s;
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(244,185,66,0.25);}
+  .btn-ghost{
+    background:transparent;border:1px solid var(--line);color:var(--cream);
+    padding:14px 26px;border-radius:10px;font-weight:600;font-size:15px;
+    transition:border-color .15s;
+  }
+  .btn-ghost:hover{border-color:var(--teal);}
+  .hero-stats{display:flex;gap:28px;margin-top:36px;}
+  .hero-stats div{font-family:var(--mono);}
+  .hero-stats .num{font-size:22px;font-weight:600;color:var(--gold);}
+  .hero-stats .lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+
+  .burst-wrap{position:relative;height:420px;display:flex;align-items:center;justify-content:center;}
+  .burst-wrap svg{width:100%;height:100%;}
+  @keyframes pop{
+    0%{r:0;opacity:0;}
+    55%{opacity:1;}
+    100%{opacity:0;}
+  }
+  @keyframes streak{
+    0%{stroke-dashoffset:60;opacity:0;}
+    30%{opacity:1;}
+    100%{stroke-dashoffset:0;opacity:0;}
+  }
+  .spark-dot{animation:pop 2.6s ease-out infinite;}
+  .spark-line{stroke-dasharray:60;animation:streak 2.6s ease-out infinite;}
+  @media (prefers-reduced-motion:reduce){
+    .spark-dot,.spark-line{animation:none;opacity:0.85;}
+  }
+
+  /* ---------- Categories ---------- */
+  .section{max-width:1200px;margin:0 auto;padding:50px 24px;}
+  .section-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:28px;flex-wrap:wrap;gap:12px;}
+  .section-head h2{font-family:var(--display);font-size:32px;font-weight:600;margin:0;}
+  .section-head p{color:var(--muted);font-size:14px;margin:6px 0 0;}
+  .chips{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px;margin-bottom:36px;}
+  .chip{
+    flex-shrink:0;
+    background:var(--card);border:1px solid var(--line);color:var(--muted);
+    padding:9px 18px;border-radius:999px;font-size:13px;font-weight:600;
+    transition:all .2s;white-space:nowrap;
+  }
+  .chip:hover{color:var(--cream);border-color:var(--muted);}
+  .chip.active{background:var(--gold);color:#1B1400;border-color:var(--gold);}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px;}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;
+    overflow:hidden;display:flex;flex-direction:column;
+    transition:transform .2s, border-color .2s;
+  }
+  .card:hover{transform:translateY(-4px);border-color:var(--muted);}
+  .card-media{
+    height:140px;display:flex;align-items:center;justify-content:center;
+    font-size:44px;position:relative;
+  }
+  .card-body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;flex:1;}
+  .card-cat{font-family:var(--mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--teal);}
+  .card-name{font-weight:600;font-size:15px;line-height:1.3;}
+  .card-qty{color:var(--muted);font-size:12px;}
+  .card-foot{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:10px;}
+  .price{font-family:var(--mono);font-weight:600;font-size:16px;color:var(--gold);}
+  .add-btn{
+    background:transparent;border:1px solid var(--gold);color:var(--gold);
+    padding:7px 14px;border-radius:8px;font-size:12px;font-weight:700;
+    transition:all .15s;
+  }
+  .add-btn:hover{background:var(--gold);color:#1B1400;}
+  .add-btn.added{background:var(--teal);border-color:var(--teal);color:#04231D;}
+
+  /* ---------- Trust strip ---------- */
+  .trust{
+    background:var(--bg-alt);border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  }
+  .trust-inner{
+    max-width:1200px;margin:0 auto;padding:30px 24px;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;
+  }
+  .trust-item{display:flex;gap:12px;align-items:flex-start;}
+  .trust-item .ic{font-size:20px;}
+  .trust-item h4{margin:0 0 4px;font-size:14px;font-weight:600;}
+  .trust-item p{margin:0;font-size:12.5px;color:var(--muted);}
+
+  /* ---------- Footer ---------- */
+  footer{border-top:1px solid var(--line);padding:48px 24px 32px;}
+  .footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:36px;}
+  footer h4{font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin:0 0 14px;}
+  footer p, footer li{font-size:13.5px;color:var(--muted);line-height:1.7;}
+  footer ul{list-style:none;padding:0;margin:0;}
+  .footer-brand{font-family:var(--display);font-weight:700;font-size:20px;margin-bottom:10px;}
+  .legal-note{
+    max-width:1200px;margin:36px auto 0;padding-top:24px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--muted);
+  }
+
+  /* ---------- Cart Drawer ---------- */
+  .overlay{
+    position:fixed;inset:0;background:rgba(0,0,0,0.55);
+    opacity:0;pointer-events:none;transition:opacity .25s;z-index:90;
+  }
+  .overlay.open{opacity:1;pointer-events:auto;}
+  .drawer{
+    position:fixed;top:0;right:0;height:100%;width:min(420px,92vw);
+    background:var(--bg-alt);border-left:1px solid var(--line);
+    transform:translateX(100%);transition:transform .3s ease;
+    z-index:100;display:flex;flex-direction:column;
+  }
+  .drawer.open{transform:translateX(0);}
+  .drawer-head{
+    padding:22px 24px;border-bottom:1px solid var(--line);
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .drawer-head h3{margin:0;font-family:var(--display);font-size:20px;}
+  .close-btn{
+    background:none;border:none;color:var(--muted);font-size:22px;line-height:1;
+  }
+  .close-btn:hover{color:var(--cream);}
+  .drawer-body{flex:1;overflow-y:auto;padding:18px 24px;}
+  .cart-empty{color:var(--muted);text-align:center;padding:60px 0;font-size:14px;}
+  .cart-item{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--line);}
+  .cart-item-media{width:52px;height:52px;border-radius:10px;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+  .cart-item-info{flex:1;}
+  .cart-item-info .nm{font-size:13.5px;font-weight:600;margin-bottom:2px;}
+  .cart-item-info .cat{font-size:11px;color:var(--muted);font-family:var(--mono);}
+  .qty-row{display:flex;align-items:center;gap:10px;margin-top:8px;}
+  .qty-btn{
+    width:24px;height:24px;border-radius:6px;background:var(--card);border:1px solid var(--line);
+    color:var(--cream);font-size:14px;display:flex;align-items:center;justify-content:center;
+  }
+  .qty-btn:hover{border-color:var(--gold);}
+  .qty-val{font-family:var(--mono);font-size:13px;min-width:18px;text-align:center;}
+  .cart-item-price{font-family:var(--mono);font-weight:600;color:var(--gold);font-size:13.5px;white-space:nowrap;}
+  .remove-btn{background:none;border:none;color:var(--muted);font-size:11px;text-decoration:underline;margin-top:6px;padding:0;}
+  .remove-btn:hover{color:var(--magenta);}
+  .drawer-foot{padding:20px 24px;border-top:1px solid var(--line);}
+  .subtotal-row{display:flex;justify-content:space-between;font-size:14px;margin-bottom:6px;color:var(--muted);}
+  .total-row{display:flex;justify-content:space-between;font-size:18px;font-weight:700;margin-bottom:16px;}
+  .total-row .amt{font-family:var(--mono);color:var(--gold);}
+
+  /* ---------- Checkout & Confirmation panels (reuse drawer look) ---------- */
+  .form-group{margin-bottom:14px;}
+  .form-group label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px;font-weight:600;}
+  .form-group input, .form-group textarea{
+    width:100%;background:var(--card);border:1px solid var(--line);border-radius:8px;
+    padding:11px 12px;color:var(--cream);font-family:var(--body);font-size:14px;
+  }
+  .form-group input:focus, .form-group textarea:focus{border-color:var(--teal);}
+  .row-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .order-summary-mini{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:16px;font-size:13px;}
+  .order-summary-mini .li{display:flex;justify-content:space-between;padding:4px 0;color:var(--muted);}
+  .back-link{background:none;border:none;color:var(--teal);font-size:13px;font-weight:600;padding:0;margin-bottom:14px;}
+
+  .confirm-box{text-align:center;padding:40px 10px;}
+  .confirm-box .ic{font-size:48px;margin-bottom:14px;}
+  .confirm-box h3{font-family:var(--display);font-size:22px;margin:0 0 8px;}
+  .confirm-box p{color:var(--muted);font-size:13.5px;margin:0 0 4px;}
+  .order-id{font-family:var(--mono);color:var(--gold);font-weight:600;letter-spacing:1px;}
+
+  @media (max-width:860px){
+    .hero{grid-template-columns:1fr;padding-top:44px;}
+    .burst-wrap{height:260px;order:-1;}
+    .footer-inner{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <svg class="spark" viewBox="0 0 24 24" fill="none">
+        <path d="M12 2L13.8 8.6L20 6L15.6 10.8L22 12L15.6 13.2L20 18L13.8 15.4L12 22L10.2 15.4L4 18L8.4 13.2L2 12L8.4 10.8L4 6L10.2 8.6L12 2Z" fill="url(#g1)"/>
+        <defs><linearGradient id="g1" x1="2" y1="2" x2="22" y2="22"><stop stop-color="#F4B942"/><stop offset="1" stop-color="#E6408F"/></linearGradient></defs>
+      </svg>
+      Vaanavil <span style="color:var(--muted);font-weight:400;">Crackers</span>
+    </div>
+    <nav class="nav-links">
+      <a href="#catalog">Shop</a>
+      <a href="#offers">Combo Boxes</a>
+      <a href="#trust">Why Us</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="cart-btn" id="cartOpenBtn" aria-label="Open cart">
+      🛒 Cart <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</header>
+
+<section class="hero">
+  <div>
+    <div class="eyebrow">Direct from Sivakasi</div>
+    <h1>Light up Diwali<br>with <em>every color</em><br>in the sky.</h1>
+    <p>Vaanavil means rainbow — and that's exactly what we bring to your terrace this festival. Factory-direct crackers, tested for quality, packed for your family's safety.</p>
+    <div class="hero-ctas">
+      <a href="#catalog"><button class="btn-primary">Shop the catalog</button></a>
+      <a href="#offers"><button class="btn-ghost">View combo boxes</button></a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="num">21+</div><div class="lbl">Products</div></div>
+      <div><div class="num">6</div><div class="lbl">Categories</div></div>
+      <div><div class="num">Since '98</div><div class="lbl">In Sivakasi</div></div>
+    </div>
+  </div>
+  <div class="burst-wrap">
+    <svg viewBox="0 0 400 400">
+      <g transform="translate(200,200)">
+        <circle class="spark-dot" r="0" fill="#F4B942" style="animation-delay:0s"/>
+        <circle class="spark-dot" r="0" fill="#E6408F" style="animation-delay:0.4s"/>
+        <circle class="spark-dot" r="0" fill="#2FE6C4" style="animation-delay:0.8s"/>
+      </g>
+      <!-- radiating streaks -->
+      <g stroke-width="2.5" fill="none" stroke-linecap="round">
+        <line class="spark-line" x1="200" y1="200" x2="200" y2="80" stroke="#F4B942" style="animation-delay:0.05s"/>
+        <line class="spark-line" x1="200" y1="200" x2="300" y2="120" stroke="#E6408F" style="animation-delay:0.15s"/>
+        <line class="spark-line" x1="200" y1="200" x2="330" y2="200" stroke="#2FE6C4" style="animation-delay:0.25s"/>
+        <line class="spark-line" x1="200" y1="200" x2="300" y2="280" stroke="#F4B942" style="animation-delay:0.35s"/>
+        <line class="spark-line" x1="200" y1="200" x2="200" y2="320" stroke="#E6408F" style="animation-delay:0.45s"/>
+        <line class="spark-line" x1="200" y1="200" x2="100" y2="280" stroke="#2FE6C4" style="animation-delay:0.55s"/>
+        <line class="spark-line" x1="200" y1="200" x2="70" y2="200" stroke="#F4B942" style="animation-delay:0.65s"/>
+        <line class="spark-line" x1="200" y1="200" x2="100" y2="120" stroke="#E6408F" style="animation-delay:0.75s"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<div class="trust" id="trust">
+  <div class="trust-inner">
+    <div class="trust-item"><span class="ic">🏭</span><div><h4>Factory direct</h4><p>Sourced straight from licensed Sivakasi units, no middlemen markup.</p></div></div>
+    <div class="trust-item"><span class="ic">✅</span><div><h4>Quality checked</h4><p>Every batch tested before it reaches the catalog.</p></div></div>
+    <div class="trust-item"><span class="ic">📦</span><div><h4>Careful packing</h4><p>Sealed, labelled boxes built for safe transport.</p></div></div>
+    <div class="trust-item"><span class="ic">💬</span><div><h4>Human support</h4><p>Order questions answered by an actual person, not a bot.</p></div></div>
+  </div>
+</div>
+
+<section class="section" id="catalog">
+  <div class="section-head">
+    <div>
+      <h2>The catalog</h2>
+      <p>Pick a category or browse everything.</p>
+    </div>
+  </div>
+  <div class="chips" id="chipBar"></div>
+  <div class="grid" id="productGrid"></div>
+</section>
+
+<section class="section" id="offers">
+  <div class="section-head">
+    <div>
+      <h2>Combo boxes</h2>
+      <p>Pre-built assortments — the easiest way to order for the whole family.</p>
+    </div>
+  </div>
+  <div class="grid" id="comboGrid"></div>
+</section>
+
+<footer id="contact">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Vaanavil Crackers</div>
+      <p>A Sivakasi-based fireworks retailer bringing factory-direct crackers to your festival, with quality checks and careful packing on every order.</p>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <ul>
+        <li>📍 Sivakasi, Tamil Nadu</li>
+        <li>📞 +91 98XXX XXXXX</li>
+        <li>✉️ orders@vaanavilcrackers.in</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="#catalog">Full catalog</a></li>
+        <li><a href="#offers">Combo boxes</a></li>
+        <li><a href="#trust">Why buy from us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="legal-note">
+    Fireworks are hazardous — use only under adult supervision, in open areas, away from flammable material, and in line with local state regulations on permitted timings and categories. Orders are pre-booked online; our team confirms availability, delivery/pickup, and payment directly with you before dispatch. This is a demo storefront built for a project — no live payment gateway is connected.
+  </div>
+</footer>
+
+<div class="overlay" id="overlay"></div>
+<div class="drawer" id="drawer" aria-live="polite">
+  <div id="drawerContent"></div>
+</div>
+
+<script>
+// ---------------- Data ----------------
+const PRODUCTS = [
+  {id:'sp1',cat:'Sparklers',icon:'✨',name:'Electric Sparklers 7cm',qty:'Pack of 10',price:40},
+  {id:'sp2',cat:'Sparklers',icon:'✨',name:'Electric Sparklers 10cm',qty:'Pack of 10',price:60},
+  {id:'sp3',cat:'Sparklers',icon:'🎇',name:'Color Sparklers 15cm',qty:'Pack of 5',price:90},
+  {id:'sp4',cat:'Sparklers',icon:'🎇',name:'Musical Sparklers',qty:'Pack of 5',price:120},
+
+  {id:'fp1',cat:'Flower Pots',icon:'🪔',name:'Mini Flower Pot',qty:'Pack of 5',price:150},
+  {id:'fp2',cat:'Flower Pots',icon:'🪔',name:'Deluxe Flower Pot',qty:'Pack of 2',price:220},
+  {id:'fp3',cat:'Flower Pots',icon:'🌼',name:'Color Flower Pot',qty:'Pack of 5',price:280},
+  {id:'fp4',cat:'Flower Pots',icon:'🌻',name:'Jumbo Flower Pot',qty:'1 piece',price:180},
+
+  {id:'gc1',cat:'Ground Chakkars',icon:'🌀',name:'Standard Ground Chakkar',qty:'Pack of 5',price:130},
+  {id:'gc2',cat:'Ground Chakkars',icon:'🌀',name:'Deluxe Wheel Chakkar',qty:'Pack of 3',price:210},
+  {id:'gc3',cat:'Ground Chakkars',icon:'💫',name:'Twin Sound Chakkar',qty:'Pack of 2',price:160},
+
+  {id:'rk1',cat:'Rockets & Sky Shots',icon:'🚀',name:'5 Star Rocket',qty:'Pack of 5',price:200},
+  {id:'rk2',cat:'Rockets & Sky Shots',icon:'🎆',name:'Skyshot 12 Shots',qty:'1 cake',price:450},
+  {id:'rk3',cat:'Rockets & Sky Shots',icon:'🎆',name:'Skyshot 25 Shots',qty:'1 cake',price:850},
+  {id:'rk4',cat:'Rockets & Sky Shots',icon:'🚀',name:'Whistling Rocket',qty:'Pack of 5',price:180},
+
+  {id:'fn1',cat:'Fancy & Novelty',icon:'🦚',name:'Peacock Fountain',qty:'Pack of 2',price:240},
+  {id:'fn2',cat:'Fancy & Novelty',icon:'🦋',name:'Butterfly Twister',qty:'Pack of 5',price:160},
+  {id:'fn3',cat:'Fancy & Novelty',icon:'🌟',name:'Ground Spinner Set',qty:'Pack of 5',price:140},
+
+  {id:'cb1',cat:'Gift Boxes',icon:'🎁',name:'Family Combo Box',qty:'40 items',price:1999},
+  {id:'cb2',cat:'Gift Boxes',icon:'🎁',name:'Grand Celebration Box',qty:'75 items',price:3499},
+  {id:'cb3',cat:'Gift Boxes',icon:'🎁',name:'Kids Special Box',qty:'20 low-noise items',price:899},
+];
+const CATEGORIES = ['All', ...new Set(PRODUCTS.map(p=>p.cat))];
+
+// ---------------- State ----------------
+let activeCat = 'All';
+let cart = {}; // id -> qty
+let view = 'cart'; // cart | checkout | confirm
+let lastOrderId = null;
+
+// ---------------- Render: chips ----------------
+function renderChips(){
+  const bar = document.getElementById('chipBar');
+  bar.innerHTML = CATEGORIES.map(c =>
+    `<button class="chip ${c===activeCat?'active':''}" data-cat="${c}">${c}</button>`
+  ).join('');
+  bar.querySelectorAll('.chip').forEach(btn=>{
+    btn.addEventListener('click', ()=>{ activeCat = btn.dataset.cat; renderChips(); renderGrid(); });
+  });
+}
+
+// ---------------- Render: product grid ----------------
+function cardHtml(p){
+  const inCart = !!cart[p.id];
+  return `<div class="card">
+    <div class="card-media" style="background:linear-gradient(135deg, rgba(244,185,66,0.12), rgba(230,64,143,0.12));">${p.icon}</div>
+    <div class="card-body">
+      <div class="card-cat">${p.cat}</div>
+      <div class="card-name">${p.name}</div>
+      <div class="card-qty">${p.qty}</div>
+      <div class="card-foot">
+        <span class="price">₹${p.price.toLocaleString('en-IN')}</span>
+        <button class="add-btn ${inCart?'added':''}" data-id="${p.id}">${inCart?'Added ✓':'Add to cart'}</button>
+      </div>
+    </div>
+  </div>`;
+}
+function renderGrid(){
+  const grid = document.getElementById('productGrid');
+  const items = activeCat==='All' ? PRODUCTS.filter(p=>p.cat!=='Gift Boxes') : PRODUCTS.filter(p=>p.cat===activeCat);
+  grid.innerHTML = items.map(cardHtml).join('');
+  grid.querySelectorAll('.add-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{ addToCart(btn.dataset.id); renderGrid(); renderComboGrid(); });
+  });
+}
+function renderComboGrid(){
+  const grid = document.getElementById('comboGrid');
+  const items = PRODUCTS.filter(p=>p.cat==='Gift Boxes');
+  grid.innerHTML = items.map(cardHtml).join('');
+  grid.querySelectorAll('.add-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{ addToCart(btn.dataset.id); renderGrid(); renderComboGrid(); });
+  });
+}
+
+// ---------------- Cart logic ----------------
+function addToCart(id){
+  cart[id] = (cart[id]||0) + 1;
+  updateCartCount();
+  renderDrawer();
+}
+function changeQty(id, delta){
+  if(!cart[id]) return;
+  cart[id] += delta;
+  if(cart[id] <= 0) delete cart[id];
+  updateCartCount();
+  renderDrawer();
+  renderGrid();
+  renderComboGrid();
+}
+function removeItem(id){
+  delete cart[id];
+  updateCartCount();
+  renderDrawer();
+  renderGrid();
+  renderComboGrid();
+}
+function cartTotal(){
+  return Object.entries(cart).reduce((sum,[id,qty])=>{
+    const p = PRODUCTS.find(p=>p.id===id);
+    return sum + (p ? p.price*qty : 0);
+  },0);
+}
+function cartCountTotal(){
+  return Object.values(cart).reduce((a,b)=>a+b,0);
+}
+function updateCartCount(){
+  document.getElementById('cartCount').textContent = cartCountTotal();
+}
+
+// ---------------- Drawer views ----------------
+function renderDrawer(){
+  const el = document.getElementById('drawerContent');
+  if(view==='checkout'){ el.innerHTML = checkoutHtml(); bindCheckout(); return; }
+  if(view==='confirm'){ el.innerHTML = confirmHtml(); bindConfirm(); return; }
+  el.innerHTML = cartHtml();
+  bindCart();
+}
+
+function cartHtml(){
+  const entries = Object.entries(cart);
+  const itemsHtml = entries.length ? entries.map(([id,qty])=>{
+    const p = PRODUCTS.find(p=>p.id===id);
+    return `<div class="cart-item">
+      <div class="cart-item-media">${p.icon}</div>
+      <div class="cart-item-info">
+        <div class="nm">${p.name}</div>
+        <div class="cat">${p.cat}</div>
+        <div class="qty-row">
+          <button class="qty-btn" data-act="dec" data-id="${id}">−</button>
+          <span class="qty-val">${qty}</span>
+          <button class="qty-btn" data-act="inc" data-id="${id}">+</button>
+        </div>
+        <button class="remove-btn" data-act="rm" data-id="${id}">Remove</button>
+      </div>
+      <div class="cart-item-price">₹${(p.price*qty).toLocaleString('en-IN')}</div>
+    </div>`;
+  }).join('') : `<div class="cart-empty">Your cart is empty.<br>Add some sparkle from the catalog.</div>`;
+
+  return `
+    <div class="drawer-head"><h3>Your cart</h3><button class="close-btn" id="closeBtn">✕</button></div>
+    <div class="drawer-body">${itemsHtml}</div>
+    <div class="drawer-foot">
+      <div class="subtotal-row"><span>Subtotal</span><span>₹${cartTotal().toLocaleString('en-IN')}</span></div>
+      <div class="total-row"><span>Total</span><span class="amt">₹${cartTotal().toLocaleString('en-IN')}</span></div>
+      <button class="btn-primary" style="width:100%" id="checkoutBtn" ${entries.length?'':'disabled style="width:100%;opacity:0.5"'}>Proceed to checkout</button>
+    </div>`;
+}
+function bindCart(){
+  document.getElementById('closeBtn').addEventListener('click', closeDrawer);
+  document.querySelectorAll('[data-act="inc"]').forEach(b=>b.addEventListener('click',()=>changeQty(b.dataset.id,1)));
+  document.querySelectorAll('[data-act="dec"]').forEach(b=>b.addEventListener('click',()=>changeQty(b.dataset.id,-1)));
+  document.querySelectorAll('[data-act="rm"]').forEach(b=>b.addEventListener('click',()=>removeItem(b.dataset.id)));
+  const co = document.getElementById('checkoutBtn');
+  if(co && !co.disabled) co.addEventListener('click', ()=>{ view='checkout'; renderDrawer(); });
+}
+
+function checkoutHtml(){
+  const entries = Object.entries(cart);
+  const summary = entries.map(([id,qty])=>{
+    const p = PRODUCTS.find(p=>p.id===id);
+    return `<div class="li"><span>${p.name} × ${qty}</span><span>₹${(p.price*qty).toLocaleString('en-IN')}</span></div>`;
+  }).join('');
+  return `
+    <div class="drawer-head"><h3>Checkout</h3><button class="close-btn" id="closeBtn">✕</button></div>
+    <div class="drawer-body">
+      <button class="back-link" id="backBtn">← Back to cart</button>
+      <div class="order-summary-mini">
+        ${summary}
+        <div class="li" style="border-top:1px solid var(--line);margin-top:6px;padding-top:8px;font-weight:700;color:var(--cream)"><span>Total</span><span>₹${cartTotal().toLocaleString('en-IN')}</span></div>
+      </div>
+      <form id="checkoutForm">
+        <div class="form-group"><label>Full name</label><input required name="name" placeholder="Your name"></div>
+        <div class="row-2">
+          <div class="form-group"><label>Phone</label><input required name="phone" type="tel" placeholder="10-digit number"></div>
+          <div class="form-group"><label>Pincode</label><input required name="pincode" placeholder="626123"></div>
+        </div>
+        <div class="form-group"><label>Delivery / pickup address</label><textarea required name="address" rows="3" placeholder="Address or 'Store pickup'"></textarea></div>
+        <div class="form-group"><label>Notes (optional)</label><textarea name="notes" rows="2" placeholder="Preferred delivery date, safe crackers only, etc."></textarea></div>
+        <button type="submit" class="btn-primary" style="width:100%">Place order request</button>
+      </form>
+    </div>`;
+}
+function bindCheckout(){
+  document.getElementById('closeBtn').addEventListener('click', closeDrawer);
+  document.getElementById('backBtn').addEventListener('click', ()=>{ view='cart'; renderDrawer(); });
+  document.getElementById('checkoutForm').addEventListener('submit', (e)=>{
+    e.preventDefault();
+    lastOrderId = 'VC' + Math.floor(100000 + Math.random()*900000);
+    view='confirm';
+    renderDrawer();
+  });
+}
+
+function confirmHtml(){
+  return `
+    <div class="drawer-head"><h3>Order request sent</h3><button class="close-btn" id="closeBtn">✕</button></div>
+    <div class="drawer-body">
+      <div class="confirm-box">
+        <div class="ic">🎆</div>
+        <h3>Thank you!</h3>
+        <p>Your order reference is</p>
+        <p class="order-id">#${lastOrderId}</p>
+        <p style="margin-top:16px;">Our team will call or WhatsApp you shortly to confirm stock, delivery/pickup, and payment.</p>
+        <button class="btn-primary" style="margin-top:24px" id="doneBtn">Continue shopping</button>
+      </div>
+    </div>`;
+}
+function bindConfirm(){
+  document.getElementById('closeBtn').addEventListener('click', closeDrawer);
+  document.getElementById('doneBtn').addEventListener('click', ()=>{
+    cart = {}; view='cart'; updateCartCount(); renderGrid(); renderComboGrid(); closeDrawer();
+  });
+}
+
+// ---------------- Drawer open/close ----------------
+function openDrawer(){
+  view = Object.keys(cart).length ? view : 'cart';
+  renderDrawer();
+  document.getElementById('overlay').classList.add('open');
+  document.getElementById('drawer').classList.add('open');
+}
+function closeDrawer(){
+  document.getElementById('overlay').classList.remove('open');
+  document.getElementById('drawer').classList.remove('open');
+}
+document.getElementById('cartOpenBtn').addEventListener('click', openDrawer);
+document.getElementById('overlay').addEventListener('click', closeDrawer);
+
+// ---------------- Init ----------------
+renderChips();
+renderGrid();
+renderComboGrid();
+renderDrawer();
+</script>
+</body>
+</html>
